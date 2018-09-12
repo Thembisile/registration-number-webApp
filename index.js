@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const flash = require('express-flash');
 const session = require('express-session');
 const pg = require("pg");
+const Registry = require('./routes/reg.js')
+const RegNumbers = require('./services/registration-numbers')
 const Pool = pg.Pool;
 
 let useSSL = false;
@@ -44,16 +46,14 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.get('/', async function(req, res){
-    res.render('home')
+let reg = RegNumbers(pool);
+let regRoute = Registry(reg)
+
+app.get('/', regRoute.home);
+app.post('/reg_numbers', regRoute.Reg);
+app.get('/clear', async function(req, res){
+    await pool.query('delete from towns;');
 })
-
-
-
-
-
-
-
 
 
 

@@ -1,15 +1,12 @@
 module.exports = function (pool) {
-    var registry = '';
-    var mapOfReg = {};
-    async function addRegistration() {
-        var listOfRegs = ['CA ', 'CJ ', 'CY ', 'CAW ']
+    
+    async function addRegistration(reg) {
+        let listOfRegs = ['CA ', 'CJ ', 'CY ', 'CAW ']
 
         if (reg != '') {
-            if (mapOfReg[reg] === undefined) {
-                for (var i = 0; i < listOfRegs.length; i++) {
+            if (reg === undefined) {
+                for (let i = 0; i < listOfRegs.length; i++) {
                     if (reg.startsWith(listOfRegs[i])) {
-
-                        mapOfReg[reg] = 0;
                         return true;
                     }
                 }
@@ -24,10 +21,10 @@ module.exports = function (pool) {
 
     function filterByTown(town){
 
-        var registrationNums = Object.keys(mapOfReg);
+        let registrationNums = Object.keys(mapOfReg);
     
         if (town === "Filter ") {
-          var nothing = registrationNums.clear();
+          let nothing = registrationNums.clear();
     
           return nothing;
         }
@@ -35,7 +32,7 @@ module.exports = function (pool) {
         if (town === "All ") {
           return registrationNums;
         }
-        var filterTown = registrationNums.filter(function(Num, storedNum){
+        let filterTown = registrationNums.filter(function(Num, storedNum){
     
           return Num.startsWith(town)
         });
