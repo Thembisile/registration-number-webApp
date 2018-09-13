@@ -4,38 +4,36 @@
             <div class="box" id="header-note">
                 <h2> Registration Numbers</h2>
                 <h4 style="color:DeepSkyBlue; font-family:'Times New Roman'">Widget Using Handlebars</h4>
-
                 <!--Regstration Number Buttons and Dropdown Menu 2-->
-                <form action="/reg_numbers" method="post" <div id="displayCount"> <strong>Registration Numbers Added :</strong>
-                    <span class=""> </span> <span class="registrationCountTwo"></span>
-            </div>
-            <span class=""> <span class="alertTwo"></span> </span>
-            <br>
-            <div class="textFieldAndBtn2">
-                <input type="text" class="registrationNumTwo" name="textField" value="" maxlength="11">
-                <button class="button-primary addRegBtnTwo" on type="submit" name="addButton">Add</button>
+                <br>
+                <form action="/reg_numbers" method="post">
+                    <input type="text" class="registrationNumTwo" name="textField" value="" maxlength="11">
+                    <br>
+                    <button class="button-primary addRegBtnTwo" type="submit" name="addButton">Add</button>
                 </form>
-                <a href="/clear"><button class="button-primary clearRegBtnTwo" on type="submit" name="button" style="width:25%">Clear
-                    <img src="trash2.png" alt=""></button></a>
-            </div>
-            <form action="/reg-numbers" method="post">
-                <div id="filter2">
-                    <label for="Town: "></label>
-                    <select class="selectWhichTownTwo" name="selectTown">
-                        <option class="selectWhichTownTwo" value="All ">All Towns</option>
-                        <option class="selectWhichTownTwo" value="CA ">Cape Town</option>
-                        <option class="selectWhichTownTwo" value="CJ ">Paarl</option>
-                        <option class="selectWhichTownTwo" value="CY ">Bellville</option>
-                        <option class="selectWhichTownTwo" value="CAW ">George</option>
-                    </select>
-                </div>
-            </form>
+                <form action="/clear" method="post" class="clearButton"><button class="button-primary clearRegBtnTwo" type="submit" name="button">Clear</button></form>
+                <form action="/reg-numbers" method="post">
+                    <div id="filter2">
+                        <label for="Town: "></label>
+                        <select class="selectWhichTownTwo" name="selectTown">
+                            <option class="selectWhichTownTwo" value="All ">All Towns</option>
+                            <option class="selectWhichTownTwo" value="CA ">Cape Town</option>
+                            <option class="selectWhichTownTwo" value="CJ ">Paarl</option>
+                            <option class="selectWhichTownTwo" value="CY ">Bellville</option>
+                            <option class="selectWhichTownTwo" value="CAW ">George</option>
+                        </select>
+                    </div>
+                </form>
 
-            <div class="displayField">
-                {{#if messages.info}} {{messages.info}} {{/if}}
+                <div class="">{{#if messages.info}}{{messages.info}}{{/if}}</div>
+                {{#each registrationNum}}
+                <div class="displayField">{{regnumbers}}</div>
+                {{/each}}
+
             </div>
         </div>
     </div>
+</div>
 
 
 </div>

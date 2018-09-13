@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const flash = require('express-flash');
 const session = require('express-session');
 const pg = require("pg");
-const Registry = require('./routes/reg.js')
-const RegNumbers = require('./services/registration-numbers')
+// const Registry = require('./routes/reg.js')
+// const RegNumbers = require('./services/registrations')
 const Pool = pg.Pool;
 
 let useSSL = false;
@@ -14,7 +14,7 @@ if (process.env.DATABASE_URL && !local) {
     useSSL = true;
 }
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://seandamon:Thando2008@localhost:5432/user_greeted';
+const connectionString = process.env.DATABASE_URL || 'postgresql://seandamon:Thando2008@localhost:5432/registration';
 
 const pool = new Pool({
     connectionString,
@@ -46,15 +46,37 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-let reg = RegNumbers(pool);
-let regRoute = Registry(reg)
+// let reg = RegNumbers(pool);
+// let regRoute = Registry(reg)
 
-app.get('/', regRoute.home);
-app.post('/reg_numbers', regRoute.Reg);
-app.get('/clear', async function(req, res){
-    await pool.query('delete from towns;');
+app.get('/', async function (req, res) {
+    let reg = await pool.query('SELECT regnumbers FROM reg;');
+    let registrationNum = reg.rows;
+    res.render('home', { registrationNum });
+});
+app.post('/reg_numbers', async function (req, res) {
+    let reg = req.body.textField;;
+    let RegNum = reg.toUpperCase();
+    let code = RegNum.substring(0, 3).trim();
+
+    if (reg.startsWith('CJ ') || reg.startsWith('CA ') || reg.startsWith('CY ') || reg.startsWith('CAW ')) {
+        let outcome = await pool.query('SELECT * FROM reg WHERE regnumbers=$1', [RegNum]);
+        if (outcome.rowCount === 0) {
+            let regCode = await pool.query('SELECT id FROM towns WHERE reg=$1', [code]);
+            result = await pool.query('INSERT INTO reg (regnumbers, reg) VALUES ($1, $2)', [RegNum, regCode.rows[0].id]);
+        }
+    }
+    if (RegNum === '') {
+        req.flash('info', 'Please Insert Registration Number To Add :')
+    }
+    res.redirect('/')
+});
+
+
+app.post('/clear', async function (req, res) {
+    await pool.query('delete from reg;');
+    res.redirect('/')
 })
-
 
 
 let PORT = process.env.PORT || 8080;

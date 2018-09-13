@@ -15,19 +15,24 @@ module.exports = function(pool){
         }
     }
     
-    async function insertIntoRegDB(registration){
-        await pool.query('INSERT INTO towns (town_name) values ($1)', [registration])
+    async function insertIntoRegDB(RegNum, regCode){
+        await pool.query('INSERT INTO reg (regnumbers, id) VALUES ($1, $2)', [RegNum, regCode.rows[0].id])
     }
 
     async function readRegistration(reg) {
-        let outcome = await pool.query('SELECT * FROM towns where town_name=$1', [reg]);
+        let outcome = await pool.query('SELECT * FROM reg where town_id=$1', [reg]);
         return outcome.rows;
     }
 
+    async function ReadRegData(){
+        let outcome = await pool.query('SELECT * FROM towns;');
+        return outcome.rows;
+    }
 
     return{
         insertIntoRegDB,
         readRegistration,
-        addReg
+        addReg,
+        ReadRegData
     }
 }
