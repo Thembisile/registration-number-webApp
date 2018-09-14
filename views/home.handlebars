@@ -11,23 +11,28 @@
                     <br>
                     <button class="button-primary addRegBtnTwo" type="submit" name="addButton">Add</button>
                 </form>
-                <form action="/clear" method="post" class="clearButton"><button class="button-primary clearRegBtnTwo" type="submit" name="button">Clear</button></form>
-                <form action="/reg-numbers" method="post">
-                    <div id="filter2">
-                        <label for="Town: "></label>
-                        <select class="selectWhichTownTwo" name="selectTown">
-                            <option class="selectWhichTownTwo" value="All ">All Towns</option>
-                            <option class="selectWhichTownTwo" value="CA ">Cape Town</option>
-                            <option class="selectWhichTownTwo" value="CJ ">Paarl</option>
-                            <option class="selectWhichTownTwo" value="CY ">Bellville</option>
-                            <option class="selectWhichTownTwo" value="CAW ">George</option>
-                        </select>
+                <form action="/clear" method="post" class="clearButton"><button class="button-primary clearRegBtnTwo" type="submit"
+                        name="button">Clear</button></form>
+                <form action="/registrationnumber" method="post">
+                    <div class="row">
+                        <div class="two columns">
+                            <select class="" name="selectTown">
+                                <option name="townsFilter" value="All ">All Towns</option>
+                                <option name="townsFilter" value="CA ">Cape Town</option>
+                                <option name="townsFilter" value="CJ ">Paarl</option>
+                                <option name="townsFilter" value="CY ">Bellville</option>
+                                <option name="townsFilter" value="CAW ">George</option>
+                            </select>
+                        </div>
+                        <div class="ten columns" style="margin-left:-10px;">
+                            <button class="button-primary" type="submit">FILTER </button>
+                        </div>
                     </div>
                 </form>
 
                 <div class="">{{#if messages.info}}{{messages.info}}{{/if}}</div>
-                {{#each registrationNum}}
-                <div class="displayField">{{regnumbers}}</div>
+                {{#each reg}}
+                <div class="displayField">{{reg_numbers}}</div>
                 {{/each}}
 
             </div>

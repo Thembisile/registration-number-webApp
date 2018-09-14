@@ -1,38 +1,43 @@
-module.exports = function(pool){
+module.exports = function (pool) {
 
-    async function addReg(reg){
-        let listOfRegs = ['CA ', 'CJ ', 'CY ', 'CAW ']
-
-        if (reg != '') {
-            if (reg === undefined) {
-                for (let i = 0; i < listOfRegs.length; i++) {
-                    if (reg.startsWith(listOfRegs[i])) {
-                        return true;
-                    }
-                }
-            }
-            return false;
+    async function addReg(RegNum, code) {
+        let regCode = await pool.query('SELECT * FROM towns WHERE reg=$1', [code]);
+        console.log(regCode.rows[0].id);
+        if (regCode.rows.length != 0) {
+            await insertIntoRegDB(RegNum, regCode.rows[0].id)
         }
     }
-    
-    async function insertIntoRegDB(RegNum, regCode){
-        await pool.query('INSERT INTO reg (regnumbers, id) VALUES ($1, $2)', [RegNum, regCode.rows[0].id])
+
+
+    async function insertIntoRegDB(RegNum, regCode) {
+        await pool.query('INSERT INTO reg (reg_numbers, town_id) VALUES ($1, $2)', [RegNum, regCode]);
+    }
+
+    async function selectTownCode(regis) {
+        let outcome = await pool.query('SELECT id FROM towns WHERE reg=$1', [regis]);
+        return outcome.rows[0].id;
+    }
+
+    async function selectTownID(town_id) {
+        await pool.query('SELECT reg_numbers FROM reg WHERE town_id=$1', [town_id])
     }
 
     async function readRegistration(reg) {
-        let outcome = await pool.query('SELECT * FROM reg where town_id=$1', [reg]);
+        let outcome = await pool.query('SELECT * FROM reg where reg_numbers=$1', [reg]);
         return outcome.rows;
     }
 
-    async function ReadRegData(){
-        let outcome = await pool.query('SELECT * FROM towns;');
+    async function ReadRegData() {
+        let outcome = await pool.query('SELECT * FROM reg;');
         return outcome.rows;
     }
 
-    return{
+    return {
         insertIntoRegDB,
         readRegistration,
         addReg,
-        ReadRegData
+        ReadRegData,
+        selectTownCode,
+        selectTownID
     }
 }
