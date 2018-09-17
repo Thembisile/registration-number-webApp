@@ -1,6 +1,7 @@
 module.exports = function (pool) {
 
     async function addReg(RegNum, code) {
+        console.log
         let regCode = await pool.query('SELECT * FROM towns WHERE reg=$1', [code]);
         console.log(regCode.rows[0].id);
         if (regCode.rows.length != 0) {
@@ -14,8 +15,7 @@ module.exports = function (pool) {
     }
 
     async function selectTownCode(regis) {
-        let outcome = await pool.query('SELECT id FROM towns WHERE reg=$1', [regis]);
-        return outcome.rows[0].id;
+        await pool.query('SELECT id FROM towns WHERE reg=$1', [regis]);
     }
 
     async function selectTownID(town_id) {

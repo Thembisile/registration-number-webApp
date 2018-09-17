@@ -11,4 +11,8 @@
 --     FOREIGN KEY(town_id) references towns(id)
 -- )
 -- drop table reg;
-SELECT reg.town_id, towns.reg, towns.town_name, reg.reg_numbers FROM towns INNER JOIN reg ON towns.id = reg.town_id;
+-- SELECT reg.town_id, towns.reg, towns.town_name, reg.reg_numbers FROM towns INNER JOIN reg ON towns.id = reg.town_id;
+-- ALTER TABLE table_name
+-- RENAME column_name_1 TO new_column_name_1,
+-- RENAME column_name_2 TO new_column_name_2,
+UPDATE towns SET reg = 'CAW' WHERE town_name = 'GEORGE';

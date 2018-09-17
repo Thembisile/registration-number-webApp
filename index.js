@@ -52,7 +52,52 @@ app.use(bodyParser.json())
 app.get('/', regRoute.home)
 app.post('/reg_numbers', regRoute.RegAddition)
 
-app.post('registrationnumber', regRoute.regNumbers)
+app.post('/registrationnumber', async function (req, res) {
+    try {
+        let townsFilter = req.body.townRadio;
+
+        if (townsFilter === 'All ') {
+            res.redirect('/');
+        }
+
+        if (townsFilter === 'CA ') {
+            outcome = await pool.query('SELECT id FROM towns WHERE reg=$1', ['CA ']);
+            let result = outcome.rows[0].id;
+            console.log(result);
+            let townID = await pool.query('SELECT reg_numbers FROM reg WHERE town_id=$1', [result]);
+            let reg = townID.rows;
+            res.render('home', { reg })
+        }
+        if (townsFilter === 'CJ ') {
+            outcome = await pool.query('SELECT id FROM towns WHERE reg=$1', ['CJ ']);
+            let result = outcome.rows[0].id;
+            console.log(result);
+            let townID = await pool.query('SELECT reg_numbers FROM reg WHERE town_id=$1', [result]);
+            let reg = townID.rows;
+            res.render('home', { reg })
+        }
+        if (townsFilter === 'CY ') {
+            outcome = await pool.query('SELECT id FROM towns WHERE reg=$1', ['CY ']);
+            let result = outcome.rows[0].id;
+            console.log(result);
+            let townID = await pool.query('SELECT reg_numbers FROM reg WHERE town_id=$1', [result]);
+            let reg = townID.rows;
+            res.render('home', { reg })
+        }
+        if (townsFilter === 'CAW ') {
+            outcome = await pool.query('SELECT id FROM towns WHERE reg=$1', ['CAW ']);
+            let result = outcome.rows[0].id;
+            console.log(result);
+            let townID = await pool.query('SELECT reg_numbers FROM reg WHERE town_id=$1', [result]);
+            let reg = townID.rows;
+            res.render('home', { reg })
+        }
+
+    }
+    catch (err) {
+        res.send(err.stack)
+    }
+})
 
 app.post('/clear', async function (req, res) {
     await pool.query('delete from reg;');
