@@ -1,10 +1,11 @@
 {
-  "name": "registration-number-webApp",
+  "name": "registration_number_webapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "directories": {
-    "test": "test"
+    "test": "test",
+    "start": "nodemon index.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -23,7 +24,15 @@
   "scripts": {
     "test": "mocha"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thembisile/registration_numbers_webApp.git"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thembisile/registration_numbers_webApp/issues"
+  },
+  "homepage": "https://github.com/Thembisile/registration_numbers_webApp#readme"
 }
