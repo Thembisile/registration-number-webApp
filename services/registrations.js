@@ -26,9 +26,9 @@ module.exports = function (pool) {
         let outcome = await pool.query('SELECT * FROM reg where reg_numbers=$1', [reg]);
         return outcome.rows;
     }
-
+    
     async function ReadRegData() {
-        let outcome = await pool.query('SELECT * FROM reg;');
+        let outcome = await pool.query('SELECT * FROM reg;'); 
         return outcome.rows;
     }
 
