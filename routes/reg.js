@@ -10,15 +10,19 @@ module.exports = function (registrations) {
                         let reg = req.body.textField;
                         let RegNum = reg.toUpperCase();
                         let code = RegNum.substring(0, 3);
+
                         if (RegNum === '') {
                                 req.flash('info', 'Please Insert Registration Number To Add :')
                         }
+
                         else {
                                 await registrations.addReg(RegNum, code);
                         }
                         res.redirect('/')
                 }
-                catch (err) { res.send(err.stack) }
+                catch (err) {
+                
+                }
         }
 
         async function regNumbers(req, res) {

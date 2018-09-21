@@ -9,10 +9,9 @@ CREATE TABLE reg(
     reg_numbers VARCHAR(13) not null,
     town_id int,
     FOREIGN KEY(town_id) references towns(id)
-)
--- drop table reg;
--- SELECT reg.town_id, towns.reg, towns.town_name, reg.reg_numbers FROM towns INNER JOIN reg ON towns.id = reg.town_id;
--- ALTER TABLE table_name
--- RENAME column_name_1 TO new_column_name_1,
--- RENAME column_name_2 TO new_column_name_2,
--- UPDATE towns SET reg = 'CAW' WHERE town_name = 'GEORGE';
+);
+
+INSERT INTO towns (town_name, reg) VALUES ('CAPE TOWN', 'CA ');
+INSERT INTO towns (town_name, reg) VALUES ('GEORGE', 'CAW ');
+INSERT INTO towns (town_name, reg) VALUES ('PAARL', 'CJ ');
+INSERT INTO towns (town_name, reg) VALUES ('BELVILLE', 'CY '); 

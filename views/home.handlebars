@@ -6,7 +6,9 @@
                 <h4 style="color:DeepSkyBlue; font-family:'Times New Roman'">Widget Using Handlebars</h4>
                 <!--Regstration Number Buttons and Dropdown Menu 2-->
                 <br>
-                <div class="flash-red">{{#if messages.info}}{{messages.info}}{{/if}}</div>
+                <div class="flash-red">
+                    {{#if messages.info}}{{messages.info}}{{/if}}
+                </div>
                 <br>
                 <form action="/reg_numbers" method="post">
                     <input type="text" class="registrationNumTwo" name="textField" value="" maxlength="11">
@@ -18,11 +20,11 @@
                 <form action="/registrationnumber" method="post">
                     <div class="row">
                         <div class="six columns">
-                                <input type="radio" name="townRadio" value="All ">All Towns
-                                <input type="radio" name="townRadio" value="CA ">Cape Town
-                                <input type="radio" name="townRadio" value="CJ ">Paarl
-                                <input type="radio" name="townRadio" value="CY ">Bellville
-                                <input type="radio" name="townRadio" value="CAW ">George
+                            <input type="radio" name="townRadio" value="All ">All Towns
+                            <input type="radio" name="townRadio" value="CA ">Cape Town
+                            <input type="radio" name="townRadio" value="CJ ">Paarl
+                            <input type="radio" name="townRadio" value="CY ">Bellville
+                            <input type="radio" name="townRadio" value="CAW ">George
                         </div>
                         <div class="six columns" style="margin-left:-10px;">
                             <button class="button-primary" type="submit">FILTER </button>
