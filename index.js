@@ -52,13 +52,10 @@ app.use(bodyParser.json())
 app.get('/', regRoute.home);
 app.post('/reg_numbers', regRoute.RegAddition);
 app.post('/registrationnumber', regRoute.regNumbers);
-app.post('/clear', async function (req, res) {
-    await pool.query('delete from reg;');
-    res.redirect('/')
-});
+app.post('/clear', regRoute.clearData);
 
 
-let PORT = process.env.PORT || 3124;
+let PORT = process.env.PORT || 5000;
 
 app.listen(PORT, function () {
     console.log('App running on port', PORT);

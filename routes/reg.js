@@ -21,7 +21,7 @@ module.exports = function (registrations) {
                         res.redirect('/')
                 }
                 catch (err) {
-                
+
                 }
         }
 
@@ -39,12 +39,13 @@ module.exports = function (registrations) {
                                 let reg = await registrations.selectTownID(result);
                                 res.render('home', { reg });
                         }
-                        if (townsFilter === 'CAW ') {
+                        if (townsFilter === 'CW ') {
                                 let code = await registrations.selectTownCode(townsFilter);
                                 result = code[0].id;
                                 let reg = await registrations.selectTownID(result);
                                 res.render('home', { reg });
                         }
+
                         if (townsFilter === 'CJ ') {
                                 let code = await registrations.selectTownCode(townsFilter);
                                 result = code[0].id;
@@ -63,9 +64,15 @@ module.exports = function (registrations) {
                 }
         }
 
+        async function clearData(req, res) {
+                await registrations.clearDB();
+                res.redirect('/')
+        }
+
         return {
                 home,
                 RegAddition,
-                regNumbers
+                regNumbers,
+                clearData
         }
 }

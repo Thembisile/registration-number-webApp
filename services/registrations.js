@@ -4,10 +4,17 @@ module.exports = function (pool) {
         let regCode = await pool.query('SELECT * FROM towns WHERE reg=$1', [code]);
         console.log(regCode.rows[0].id);
         if (regCode.rows.length != 0) {
-            await insertIntoRegDB(RegNum, regCode.rows[0].id)
+            let regCode = await pool.query('SELECT * FROM towns WHERE reg=$1', [code])
+            await insertIntoRegDB(RegNum, regCode.rows[0].id);
+        }
+        else{
+
         }
     }
 
+    async function readTowns(code){
+        await pool.query('SELECT * FROM towns WHERE reg=$1', [code])
+    }
 
     async function insertIntoRegDB(RegNum, regCode) {
         await pool.query('INSERT INTO reg (reg_numbers, town_id) VALUES ($1, $2)', [RegNum, regCode]);
@@ -32,6 +39,10 @@ module.exports = function (pool) {
         let outcome = await pool.query('SELECT * FROM reg;'); 
         return outcome.rows;
     }
+    async function clearDB() {
+        await pool.query('DELETE FROM reg;');
+        return;
+    }
 
     return {
         insertIntoRegDB,
@@ -39,6 +50,8 @@ module.exports = function (pool) {
         addReg,
         ReadRegData,
         selectTownCode,
-        selectTownID
+        selectTownID,
+        clearDB,
+        readTowns
     }
 }
