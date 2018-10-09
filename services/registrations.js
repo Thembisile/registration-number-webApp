@@ -7,14 +7,14 @@ module.exports = function (pool) {
             let regNumber = await pool.query('SELECT * FROM reg WHERE reg_numbers=$1', [RegNum])
             if (regNumber.rows.length === 0) {
                 await insertIntoRegDB(RegNum, regCode.rows[0].id);
-                return true;
+                return 'Found';
             }
             else {
-                return false
+                return 'Duplicate'
             }
         }
         else {
-            // undefined licence plate
+             return 'Non-exist'
         }
     }
 

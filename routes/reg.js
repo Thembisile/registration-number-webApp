@@ -16,7 +16,17 @@ module.exports = function (registrations) {
                         }
 
                         else {
-                                await registrations.addReg(RegNum, code);
+                                let regAddition = await registrations.addReg(RegNum, code);
+
+                                if (regAddition === 'Found') {
+                                        req.flash('success', 'Successfully Added!')
+                                }
+                                if (regAddition === 'Duplicate') {
+                                        req.flash('info', 'Registration Already Exists')
+                                }
+                                if (regAddition === 'Non-exist') {
+                                        req.flash('info', 'Invalid Registration')
+                                }
                         }
                         res.redirect('/')
                 }
