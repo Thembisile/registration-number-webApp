@@ -40,7 +40,7 @@ module.exports = function (pool) {
 
     async function readRegistration(reg) {
         let outcome = await pool.query('SELECT * FROM reg where reg_numbers=$1', [reg]);
-        outcome.rows;
+        return outcome.rows;
     }
 
     async function ReadRegData() {
@@ -54,12 +54,7 @@ module.exports = function (pool) {
     }
 
     async function clearDB() {
-        let clearData = await pool.query('DELETE FROM reg;');
-        if (clearData !== 0) {
-            await pool.query('DELETE FROM reg;');
-            return 'Cleared'
-        }
-        return clearData;
+        await pool.query('DELETE FROM reg;');
     }
 
     return {
