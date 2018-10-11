@@ -45,6 +45,12 @@ module.exports = function (pool) {
         let outcome = await pool.query('SELECT * FROM reg;');
         return outcome.rows;
     }
+
+    async function AllTowns(){
+        outcome = await pool.query('SELECT * FROM towns;')
+        return outcome.rows
+    }
+
     async function clearDB() {
         await pool.query('DELETE FROM reg;');
         return;
@@ -58,6 +64,7 @@ module.exports = function (pool) {
         selectTownCode,
         selectTownID,
         clearDB,
-        readTowns
+        readTowns,
+        AllTowns
     }
 }

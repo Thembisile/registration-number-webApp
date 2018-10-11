@@ -51,5 +51,12 @@ describe('Registration Numbers', async function () {
         let readAll = await getReg.ReadRegData()
 
         assert.strictEqual(readAll.length , 3)
+    });
+    it('Should check the town if its existing', async function(){
+        let getReg = RegistrationConstructor(pool)
+
+        RegiNum = await getReg.AllTowns()
+
+        assert.strictEqual(RegiNum.length, 4)
     })
 });

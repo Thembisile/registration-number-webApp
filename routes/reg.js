@@ -68,6 +68,12 @@ module.exports = function (registrations) {
                                 let reg = await registrations.selectTownID(result);
                                 res.render('home', { reg });
                         }
+                        if (townsFilter === 'CAW ') {
+                                let code = await registrations.selectTownCode(townsFilter);
+                                result = code[0].id;
+                                let reg = await registrations.selectTownID(result);
+                                res.render('home', { reg });
+                        }
                 }
                 catch (err) {
                         res.send(err.stack)
