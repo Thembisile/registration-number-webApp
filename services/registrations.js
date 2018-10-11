@@ -3,8 +3,9 @@ module.exports = function (pool) {
     async function addReg(RegNum, code) {
         let regCode = await pool.query('SELECT * FROM towns WHERE reg=$1', [code]);
         console.log(RegNum);
-        if (regCode.rows.length != 0) {
-
+        console.log( 'Show all rows', regCode.rows)
+        if (regCode.rows.length !== 0) {
+            
             let regNumber = await pool.query('SELECT * FROM reg WHERE reg_numbers=$1', [RegNum])
 
             if (regNumber.rows.length === 0) {
