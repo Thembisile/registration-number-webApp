@@ -19,44 +19,51 @@ describe('Registration Numbers', async function () {
     it('Should return the entered registration number', async function () {
         let getReg = RegistrationConstructor(pool);
 
-        RegiNum = await getReg.addReg('CA 123', 'CA ');
+        registration = await getReg.addReg('CA 123', 'CA');
 
-        assert.strictEqual(RegiNum, 'Found');
+        assert.strictEqual(registration, 'Found');
     });
 
     it('Should not return the same registration number entered', async function () {
         let getReg = RegistrationConstructor(pool);
 
-        RegiNum = await getReg.addReg('CA 123', 'CA ');
-        RegiNum2 = await getReg.addReg('CA 123', 'CA ');
+        registration = await getReg.addReg('CA 123', 'CA');
+        registration2 = await getReg.addReg('CA 123', 'CA');
 
-        assert.strictEqual(RegiNum2, 'Duplicate');
+        assert.strictEqual(registration2, 'Duplicate');
     });
     it('Should return all filtered registration numbers', async function () {
         let getReg = RegistrationConstructor(pool)
 
-        RegiNum = await getReg.addReg('CF 123', 'CF ');
+        registration = await getReg.addReg('CF 123', 'CF');
 
 
-        assert.strictEqual(RegiNum,  'Non-exist')
+        assert.strictEqual(registration, 'Non-exist')
 
     });
-    it('Should check if all registrations exist', async function() {
+    it('Should check if all registrations exist', async function () {
         let getReg = RegistrationConstructor(pool)
 
-        RegiNum = await getReg.addReg('CJ 123', 'CJ ')
-        RegiNum = await getReg.addReg('CA 123', 'CA ')
-        RegiNum = await getReg.addReg('CY 123', 'CY ')
+        registration = await getReg.addReg('CJ 123', 'CJ')
+        registration = await getReg.addReg('CA 123', 'CA')
+        registration = await getReg.addReg('CY 123', 'CY')
 
         let readAll = await getReg.ReadRegData()
 
-        assert.strictEqual(readAll.length , 3)
+        assert.strictEqual(readAll.length, 3)
     });
-    it('Should check the town if its existing', async function(){
+    it('Should check the town if its existing', async function () {
         let getReg = RegistrationConstructor(pool)
 
-        RegiNum = await getReg.AllTowns()
+        registration = await getReg.AllTowns()
 
-        assert.strictEqual(RegiNum.length, 4)
+        assert.strictEqual(registration.length, 5)
+    })
+    it('Should return the town registration with ID', async function () {
+        let getReg = RegistrationConstructor(pool)
+
+        registration = await getReg.selectTownCode(2)
+
+        assert.strictEqual(registration, getReg.selectTownID('CA');
     })
 });
