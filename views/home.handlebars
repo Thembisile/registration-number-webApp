@@ -13,26 +13,33 @@
                     {{messages.success}}
                 </div>
                 <br>
-                <form action="/reg_numbers" method="post">
-                    <input type="text" class="registrationNumTwo" name="textField" value="" maxlength="11">
-                    <br>
-                    <button class="button-primary addRegBtnTwo" type="submit" name="addButton">Add</button>
-                </form>
-                <form action="/clear" method="post" class="clearButton"><button class="button-primary clearRegBtnTwo" type="submit"
-                        name="button">Clear</button></form>
-                <form action="/registrationnumber" method="post">
-                    <div class="row">
-                        <div class="six columns">
-                            <input type="radio" name="townRadio" value="All ">All Towns
-                            <input type="radio" name="townRadio" value="CA ">Cape Town
-                            <input type="radio" name="townRadio" value="CJ ">Paarl
-                            <input type="radio" name="townRadio" value="CW ">Worcester
-                            <input type="radio" name="townRadio" value="CY ">Bellville
-                        </div>
-                        <div class="six columns" style="margin-left:-10px;">
-                            <button class="button-primary" type="submit">FILTER </button>
-                        </div>
+
+                <div class="row">
+                    <div class="four columns">
+                        <form action="/reg_numbers" method="post">
+                            <input type="text" class="registrationNumTwo" name="textField" value="" maxlength="11">
+                            <button class="button-primary addRegBtnTwo" type="submit" name="addButton">Add</button>
+                        </form>
                     </div>
+                    <div class="eight columns">
+                        <form action="/clear" method="post" class="clearButton"><button class="button-primary clearRegBtnTwo"
+                                type="submit" name="button">Clear</button></form>
+                        <form action="/registrationnumber" method="post">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="seven columns">
+                        <input type="radio" name="townRadio" value="All">All Towns
+                        <input type="radio" name="townRadio" value="CA">Cape Town
+                        <input type="radio" name="townRadio" value="CJ">Paarl
+                        <input type="radio" name="townRadio" value="CW">Worcester
+                        <input type="radio" name="townRadio" value="CY">Bellville
+                        <input type="radio" name="townRadio" value="CAW">George
+                    </div>
+                    <div class="five columns">
+                        <button class="button-primary" type="submit">FILTER </button>
+                    </div>
+                </div>
                 </form>
 
                 {{#each reg}}

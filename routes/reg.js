@@ -9,7 +9,7 @@ module.exports = function (registrations) {
                 try {
                         let reg = req.body.textField;
                         let RegNum = reg.toUpperCase();
-                        let code = RegNum.substring(0, 3);
+                        let code = RegNum.substring(0, 3).trim();
 
                         if (RegNum === '') {
                                 req.flash('info', 'Please Insert Registration Number To Add :')
@@ -39,36 +39,36 @@ module.exports = function (registrations) {
                 try {
                         let townsFilter = req.body.townRadio;
 
-                        if (townsFilter === 'All ') {
+                        if (townsFilter === 'All') {
                                 res.redirect('/')
                         }
 
-                        if (townsFilter === 'CA ') {
+                        if (townsFilter === 'CA') {
                                 let code = await registrations.selectTownCode(townsFilter);
                                 result = code[0].id;
                                 let reg = await registrations.selectTownID(result);
                                 res.render('home', { reg });
                         }
-                        if (townsFilter === 'CW ') {
+                        if (townsFilter === 'CW') {
                                 let code = await registrations.selectTownCode(townsFilter);
                                 result = code[0].id;
                                 let reg = await registrations.selectTownID(result);
                                 res.render('home', { reg });
                         }
 
-                        if (townsFilter === 'CJ ') {
+                        if (townsFilter === 'CJ') {
                                 let code = await registrations.selectTownCode(townsFilter);
                                 result = code[0].id;
                                 let reg = await registrations.selectTownID(result);
                                 res.render('home', { reg });
                         }
-                        if (townsFilter === 'CY ') {
+                        if (townsFilter === 'CY') {
                                 let code = await registrations.selectTownCode(townsFilter);
                                 result = code[0].id;
                                 let reg = await registrations.selectTownID(result);
                                 res.render('home', { reg });
                         }
-                        if (townsFilter === 'CAW ') {
+                        if (townsFilter === 'CAW') {
                                 let code = await registrations.selectTownCode(townsFilter);
                                 result = code[0].id;
                                 let reg = await registrations.selectTownID(result);
