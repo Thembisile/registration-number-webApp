@@ -64,6 +64,6 @@ describe('Registration Numbers', async function () {
 
         registration = await getReg.selectTownCode(2)
 
-        assert.strictEqual(registration, getReg.selectTownID('CA');
+        assert.strictEqual(registration, getReg.selectTownID('CA'));
     })
 });
