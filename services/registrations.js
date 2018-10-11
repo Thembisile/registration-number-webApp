@@ -4,7 +4,9 @@ module.exports = function (pool) {
         let regCode = await pool.query('SELECT * FROM towns WHERE reg=$1', [code]);
         console.log(RegNum);
         if (regCode.rows.length != 0) {
+
             let regNumber = await pool.query('SELECT * FROM reg WHERE reg_numbers=$1', [RegNum])
+
             if (regNumber.rows.length === 0) {
                 await insertIntoRegDB(RegNum, regCode.rows[0].id);
                 return 'Found';
@@ -14,7 +16,7 @@ module.exports = function (pool) {
             }
         }
         else {
-             return 'Non-exist'
+            return 'Non-exist'
         }
     }
 
@@ -38,7 +40,7 @@ module.exports = function (pool) {
 
     async function readRegistration(reg) {
         let outcome = await pool.query('SELECT * FROM reg where reg_numbers=$1', [reg]);
-        return outcome.rows;
+        outcome.rows;
     }
 
     async function ReadRegData() {
@@ -46,14 +48,18 @@ module.exports = function (pool) {
         return outcome.rows;
     }
 
-    async function AllTowns(){
+    async function AllTowns() {
         outcome = await pool.query('SELECT * FROM towns;')
         return outcome.rows
     }
 
     async function clearDB() {
-        await pool.query('DELETE FROM reg;');
-        return;
+        let clearData = await pool.query('DELETE FROM reg;');
+        if (clearData !== 0) {
+            await pool.query('DELETE FROM reg;');
+            return 'Cleared'
+        }
+        return clearData;
     }
 
     return {

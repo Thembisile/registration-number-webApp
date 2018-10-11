@@ -38,6 +38,10 @@ module.exports = function (registrations) {
         async function regNumbers(req, res) {
                 try {
                         let townsFilter = req.body.townRadio;
+                        let unavailableTowns = await registrations.selectTownID(townsFilter)
+                        if (unavailableTowns === 'Unavailable') {
+                                req.flash('info', 'Oops! No Towns To Filter')
+                        }
 
                         if (townsFilter === 'All') {
                                 res.redirect('/')
@@ -81,7 +85,10 @@ module.exports = function (registrations) {
         }
 
         async function clearData(req, res) {
-                await registrations.clearDB();
+                let clearData = await registrations.clearDB();
+                if (clearData === 'Cleared') {
+                        req.flash('success', 'Successfully Cleared!')
+                }
                 res.redirect('/')
         }
 
