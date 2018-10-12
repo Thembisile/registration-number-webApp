@@ -59,15 +59,4 @@ describe('Registration Numbers', async function () {
 
         assert.strictEqual(registration.length, 5)
     })
-    it('Should check for cape town only ', async function(){
-        let getReg = RegistrationConstructor(pool)
-
-        await getReg.addReg('CA 123-456', 1);
-        await getReg.addReg('CJ 123-456', 2);
-        await getReg.addReg('CAW 123-456', 5);
-
-        let result = await getReg.readRegistration('CA 123-456')
-
-        assert.strictEqual(result, 1);
-    })
 });

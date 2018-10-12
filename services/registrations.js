@@ -53,6 +53,11 @@ module.exports = function (pool) {
         return outcome.rows
     }
 
+    async function countAllRegistrations () {
+        let count = await pool.query('SELECT COUNT (*) FROM reg;');
+        return parseInt(count.rows[0].count);
+    }
+
     async function clearDB() {
         await pool.query('DELETE FROM reg;');
     }
@@ -66,6 +71,7 @@ module.exports = function (pool) {
         selectTownID,
         clearDB,
         readTowns,
-        AllTowns
+        AllTowns,
+        countAllRegistrations
     }
 }
