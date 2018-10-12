@@ -59,11 +59,15 @@ describe('Registration Numbers', async function () {
 
         assert.strictEqual(registration.length, 5)
     })
-    it('Should return the town registration with ID', async function () {
+    it('Should check for cape town only ', async function(){
         let getReg = RegistrationConstructor(pool)
 
-        registration = await getReg.selectTownCode(2)
+        await getReg.addReg('CA 123-456', 1);
+        await getReg.addReg('CJ 123-456', 2);
+        await getReg.addReg('CAW 123-456', 5);
 
-        assert.strictEqual(registration, getReg.selectTownID('CA'));
+        let result = await getReg.readRegistration('CA 123-456')
+
+        assert.strictEqual(result, 1);
     })
 });
