@@ -1,7 +1,7 @@
 module.exports = function (registrations) {
 
         async function home(req, res) {
-                let reg = await registrations.ReadRegData();
+                let reg = await registrations.readRegData();
                 res.render('home', { reg })
         }
 

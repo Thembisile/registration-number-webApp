@@ -2,7 +2,7 @@ module.exports = function (pool) {
 
     async function addReg(RegNum, code) {
         let regCode = await pool.query('SELECT * FROM towns WHERE reg=$1', [code]);
-        console.log(RegNum);
+
         if (regCode.rows.length !== 0) {
             
             let regNumber = await pool.query('SELECT * FROM reg WHERE reg_numbers=$1', [RegNum])
@@ -43,12 +43,12 @@ module.exports = function (pool) {
         return outcome.rows;
     }
 
-    async function ReadRegData() {
+    async function readRegData() {
         let outcome = await pool.query('SELECT * FROM reg;');
         return outcome.rows;
     }
 
-    async function AllTowns() {
+    async function allTowns() {
         outcome = await pool.query('SELECT * FROM towns;')
         return outcome.rows
     }
@@ -56,6 +56,11 @@ module.exports = function (pool) {
     async function countAllRegistrations () {
         let count = await pool.query('SELECT COUNT (*) FROM reg;');
         return parseInt(count.rows[0].count);
+    }
+
+    async function allRegistrationsData () {    
+        let data = await pool.query('SELECT * FROM towns INNER JOIN reg ON towns.id = reg.towns_id');
+        return data.rows;
     }
 
     async function clearDB() {
@@ -66,12 +71,13 @@ module.exports = function (pool) {
         insertIntoRegDB,
         readRegistration,
         addReg,
-        ReadRegData,
+        readRegData,
         selectTownCode,
         selectTownID,
         clearDB,
         readTowns,
-        AllTowns,
-        countAllRegistrations
+        allTowns,
+        countAllRegistrations,
+        allRegistrationsData
     }
 }
